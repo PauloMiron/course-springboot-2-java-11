@@ -1,14 +1,8 @@
 package com.CursoEducaWeb.course.confiig;
 
-import com.CursoEducaWeb.course.entities.Category;
-import com.CursoEducaWeb.course.entities.Order;
-import com.CursoEducaWeb.course.entities.Product;
-import com.CursoEducaWeb.course.entities.User;
+import com.CursoEducaWeb.course.entities.*;
 import com.CursoEducaWeb.course.entities.enuns.OrderStatus;
-import com.CursoEducaWeb.course.repositories.CategoryRepository;
-import com.CursoEducaWeb.course.repositories.OrderRepository;
-import com.CursoEducaWeb.course.repositories.ProductRepository;
-import com.CursoEducaWeb.course.repositories.UserRepository;
+import com.CursoEducaWeb.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +22,8 @@ public class TestConfig implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private OrderItemRepository orderItemRepository;
     @Override
     public void run(String... args) throws Exception {
         Category cat1 = new Category(null, "Electronics");
@@ -51,6 +46,12 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
         categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
         productRepository.saveAll((Arrays.asList(p1,p2,p3,p4,p5)));
 
@@ -62,5 +63,6 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategories().add(cat2);
 
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+        orderItemRepository.saveAll((Arrays.asList(oi1,oi2,oi3,oi4)));
     }
 }

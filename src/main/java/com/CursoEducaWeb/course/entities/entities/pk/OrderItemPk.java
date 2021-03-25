@@ -10,10 +10,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class OrdemItemPk implements Serializable {
+public class OrderItemPk implements Serializable {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -38,7 +39,7 @@ public class OrdemItemPk implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrdemItemPk that = (OrdemItemPk) o;
+        OrderItemPk that = (OrderItemPk) o;
         return Objects.equals(order, that.order) &&
                 Objects.equals(product, that.product);
     }
